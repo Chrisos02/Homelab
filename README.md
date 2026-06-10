@@ -11,7 +11,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 | CPU | Intel i7-4770 |
 | RAM | 16GB DDR3 |
 | GPU | GTX 950 (unused) |
-| SSD | 128GB (OS) |
+| SSD | 512GB (OS) |
 | HDD | 1TB (storage) |
 
 ---
