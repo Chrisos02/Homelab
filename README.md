@@ -33,7 +33,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 ### Proxmox VE
 - **Type:** Type 1 Hypervisor (bare metal)
 - **Version:** 8.4.0
-- **Interface:** `https://192.168.100.200:8006`
+- **Interface:** `https://192.168.10.200:8006`
 - **Network interface:** `enp3s0` (Ethernet)
 
 ### Ubuntu Server VM (`ubuntu-docker`)
@@ -49,7 +49,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 
 | Service | URL (Local) | URL (Remote) | Description |
 |---------|------------|--------------|-------------|
-| Proxmox | `https://192.168.100.200:8006` | `https://100.117.76.106:8006` | Hypervisor management |
+| Proxmox | `https://192.168.10.200:8006` | `https://100.117.76.106:8006` | Hypervisor management |
 | Portainer | `http://192.168.10.119:9000` | `http://100.72.135.5:9000` | Docker management |
 | Grafana | `http://192.168.10.119:3000` | `http://100.72.135.5:3000` | Monitoring dashboards |
 | Prometheus | `http://192.168.10.119:9090` | `http://100.72.135.5:9090` | Metrics collection |
