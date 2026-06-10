@@ -73,7 +73,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 ![Proxmox](screenshots/proxmox.png)
 
 ### Homepage — Service Dashboard
-![Homepage](screenshots/grafana_dashboard.png)
+![Homepage](screenshots/homepage.png)
 
 ### Grafana — Monitoring Dashboard
 ![Grafana](screenshots/grafana_dashboard.png)
