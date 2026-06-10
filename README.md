@@ -76,16 +76,16 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 ![Homepage](screenshots/homepage-dashboard.png)
 
 ### Grafana — Monitoring Dashboard
-![Grafana](screenshots/grafana-dashboard.png)
+![Grafana](screenshots/grafana_dashboard.png)
 
 ### Portainer — Docker Management
-![Portainer](screenshots/portainer.png)
+![Portainer](screenshots/potainer.png)
 
 ### Pi-hole — DNS Ad Blocker
-![Pi-hole](screenshots/pi-hole.png)
+![Pi-hole](screenshots/pi_hole.png)
 
 ### Tailscale — Remote Access
-![Tailscale](screenshots/tailscale-machines.png)
+![Tailscale](screenshots/tailscale.png)
 
 ---
 
