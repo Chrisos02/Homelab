@@ -21,7 +21,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 | Device | IP Address | Notes |
 |--------|-----------|-------|
 | Router/Gateway | `192.168.100.1` | |
-| Proxmox Host | `192.168.100.200` | Static IP, Ethernet only |
+| Proxmox Host | `192.168.10.200` | Static IP, Ethernet only |
 | Ubuntu Docker VM | `192.168.10.119` | DHCP |
 | Proxmox (Tailscale) | `100.117.76.106` | Remote access |
 | Ubuntu VM (Tailscale) | `100.72.135.5` | Remote access |
