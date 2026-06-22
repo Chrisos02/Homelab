@@ -158,7 +158,7 @@ Addresses: ::
 
 ![DNS Settings](screenshots/pihole-dns-settings.png)
 
-![Windows_DNS](screenshots/windows_dns_client.png)
+![Windows_DNS](screenshots/windows-dns-client.png)
 
 
 ---
