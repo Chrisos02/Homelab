@@ -158,13 +158,8 @@ Addresses: ::
 
 ![DNS Settings](screenshots/pihole-dns-settings.png)
 
-### Query Log
+![Windows_DNS](screenshots/windows_dns_client.png)
 
-![Query Log](screenshots/pihole-query-log.png)
-
-### Unbound Validation
-
-![Unbound Test](screenshots/unbound-test.png)
 
 ---
 
