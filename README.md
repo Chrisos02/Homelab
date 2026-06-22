@@ -178,24 +178,54 @@ services:
 ```
 
 ---
-
-## Remote Access
-
-**Tailscale** is installed on Proxmox, the Ubuntu Docker VM, and the Pi-hole LXC container. This allows secure remote access from anywhere without port forwarding or exposing ports to the internet.
-
+ 
+## Repository Structure
+ 
+```
+homelab/
+├── README.md
+├── screenshots/
+├── monitoring/
+│   ├── docker-compose.yml
+│   └── prometheus.yml
+├── homepage/
+│   ├── docker-compose.yml
+│   └── config/
+│       └── services.yaml
+└── pi-hole/
+    └── unbound/
+        └── pi-hole.conf
+```
+ 
 ---
-
+ 
+## Remote Access
+ 
+**Tailscale** is installed on Proxmox, the Ubuntu Docker VM, and the Pi-hole LXC container. This allows secure remote access from anywhere without port forwarding or exposing ports to the internet.
+ 
+---
+ 
+## Pi-hole + Unbound
+ 
+Pi-hole runs as an LXC container on Proxmox and handles network-wide DNS ad blocking. It is configured to use **Unbound** as a local recursive DNS resolver instead of a third-party DNS provider like Google or Cloudflare.
+ 
+This means DNS queries are resolved directly against the root DNS servers — no third party sees your DNS traffic.
+ 
+Config file: [`pi-hole/unbound/pi-hole.conf`](pi-hole/unbound/pi-hole.conf)
+ 
+---
+ 
 ## Planned
-
+ 
 - [ ] Nextcloud — self-hosted cloud storage
 - [ ] Nginx Proxy Manager — reverse proxy with domain names
-- [ ] Proxmox metrics in Grafana
-- [ ] Automated backups
-
+- [ ] MikroTik hEX router — VLAN and routing practice
+- [ ] Proxmox Backup Server — second PC for automated backups
+- [ ] Proxmox host metrics in Grafana
 ---
-
+ 
 ## Skills Demonstrated
-
+ 
 - Type 1 hypervisor setup and management (Proxmox VE)
 - Virtual machine provisioning and configuration
 - LXC container management
@@ -203,5 +233,6 @@ services:
 - Containerization (Docker, Docker Compose)
 - Infrastructure monitoring (Grafana, Prometheus, Node Exporter)
 - DNS management and network-wide ad blocking (Pi-hole)
+- Local recursive DNS resolution (Unbound)
 - VPN and secure remote access (Tailscale)
 - Networking fundamentals (static IPs, subnetting, DNS, gateways)
