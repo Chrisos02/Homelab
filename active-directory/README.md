@@ -130,23 +130,6 @@ homelab.local
 
 ---
 
-## Current Status
-
-- [x] Windows Server 2022 installed
-- [x] Static IP configured on Domain Controller
-- [x] Active Directory Domain Services installed
-- [x] Domain `homelab.local` created
-- [x] OUs created
-- [x] Users created
-- [x] Groups created
-- [x] Windows 11 client configured with static IP and DNS
-- [x] Windows 11 client joined to domain
-- [x] Domain user login verified (`chris.it@homelab.local`)
-- [ ] Group memberships verified with PowerShell
-- [ ] First GPO created and tested
-
----
-
 ## Documentation
 
 1. [Network Setup](01-setup/01-network-setup.md)
