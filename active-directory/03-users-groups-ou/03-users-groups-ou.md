@@ -44,7 +44,7 @@ Examples:
 
 | Display Name | Username | OU |
 |---|---|---|
-| Chris Osmundsen | cosmundsen | OU_Users |
+| Chris Osmundsen | chris.it | OU_Users |
 | Ola Hansen | ola.hr | OU_Users |
 | Kari Nordmann | kari.sales | OU_Users |
 
@@ -74,7 +74,7 @@ The following security groups were created in `OU_Groups`:
 
 | User | Group |
 |---|---|
-| cosmundsen | IT_Users |
+| chris.it | IT_Users |
 | ola.hr | HR_Users |
 | kari.sales | Sales_Users |
 | cadmin | IT_Admins |
