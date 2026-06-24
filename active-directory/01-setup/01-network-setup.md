@@ -74,30 +74,6 @@ ping dc01
 nslookup homelab.local
 ```
 
-Expected result:
-
-- Client can ping DC01
-- Client can resolve `homelab.local`
-- Client can resolve `dc01`
-
----
-
-## Key Concepts
-
-- Domain Controllers should use static IP addresses
-- Active Directory depends heavily on DNS
-- Domain clients must use the Domain Controller as DNS
-- Proxmox bridged networking allows VMs to communicate on the LAN
-
----
-
-## Status
-
-- [x] DC01 has static IP
-- [x] User01 has static IP
-- [x] User01 DNS points to DC01
-- [ ] Domain join completed
-
 ---
 
 ## Next Step
