@@ -70,7 +70,7 @@ homelab.local
 
 | Name | Username | Role |
 |---|---|---|
-| Chris Osmundsen | cosmundsen | IT user |
+| Chris Osmundsen | chris.it | IT user |
 | Ola Hansen | ola.hr | HR user |
 | Kari Nordmann | kari.sales | Sales user |
 | Chris Admin | cadmin | Admin account |
@@ -93,7 +93,7 @@ homelab.local
 
 | User | Group |
 |---|---|
-| cosmundsen | IT_Users |
+| chris.it | IT_Users |
 | ola.hr | HR_Users |
 | kari.sales | Sales_Users |
 | cadmin | IT_Admins |
