@@ -76,7 +76,7 @@ Access is controlled with AD security groups.
 
 ### IT Permissions
 
-![IT NTFS](screenshots/it-ntfs-after.png)
+![IT NTFS](screenshots/it-nfts-after.png)
 
 ### Sales Permissions
 
