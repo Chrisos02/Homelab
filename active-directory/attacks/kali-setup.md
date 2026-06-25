@@ -18,7 +18,7 @@ Kali Linux is used as the attacker machine in this lab.
 
 Kali is connected to the same host-only network as the domain:
 
-* IP Address: `192.168.8.129`
+* IP Address: `192.168.10.148`
 
 ---
 
