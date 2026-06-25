@@ -24,8 +24,11 @@ The setup was tested by logging into `User01` as domain users.
 
 ![Drive Mapping GPO](screenshots/drive-mapping-gpo.png)
 
+## Ola Hansen (Sales)
 ![HR Drive Result](screenshots/hr-drive-result.png)
 
+## Chris Olsen (IT)
 ![IT Drive Result](screenshots/it-drive-result.png)
 
+## Kari Nordmann (HR)
 ![Sales Drive Result](screenshots/sales-drive-result.png)
