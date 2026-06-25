@@ -18,7 +18,7 @@ BloodHound is used to visualize relationships within Active Directory.
   http://127.0.0.1:8080
   ```
   ```
-  sudo bloodhound-python -u 'user1' -p 'password123!' -d home.lab -ns 192.168.8.130 -c all --zip
+  sudo bloodhound-python -u 'user1' -p 'Test3214' -d home.lab -ns 192.168.10.20 -c all --zip
   ```
   
 ---
