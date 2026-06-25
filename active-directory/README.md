@@ -43,7 +43,7 @@ homelab.local
 homelab.local
 │
 ├── OU_Users
-│   ├── Chris Osmundsen
+│   ├── Chris Olsen
 │   ├── Ola Hansen
 │   └── Kari Nordmann
 │
@@ -69,7 +69,7 @@ homelab.local
 
 | Name | Username | Role |
 |------|----------|------|
-| Chris Osmundsen | chris.it | IT user |
+| Chris Olsen | chris.it | IT user |
 | Ola Hansen | ola.hr | HR user |
 | Kari Nordmann | kari.sales | Sales user |
 | Chris Admin | cadmin | Admin account |
