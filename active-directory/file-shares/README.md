@@ -82,21 +82,6 @@ Access is controlled with AD security groups.
 
 ![Sales NTFS](screenshots/sales-ntfs-after.png)
 
----
-
-## Validation
-
-The shares were validated by logging into the Windows 11 domain client as different users.
-
-Example:
-
-- `ola.hr` receives access to HR resources.
-- `ola.hr` should not access IT or Sales resources.
-- `IT_Admins` has Full Control across all department shares.
-
-### HR User Drive Result
-
-![HR Drive Result](screenshots/hr-drive-result.png)
 
 ---
 
