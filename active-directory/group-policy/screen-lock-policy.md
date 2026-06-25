@@ -22,6 +22,6 @@ Recommended settings:
 - Screen saver timeout: 300 seconds
 - Password protect the screen saver: Enabled
 
-###Screen-Lock-Policy
+## Screenshot
 ![Screen-Lock-Policy](screenshots/screen-lock.png)
 
