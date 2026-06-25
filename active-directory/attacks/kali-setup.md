@@ -42,7 +42,7 @@ Verified communication with:
 
 ```
 ping 192.168.10.10
-ping home.lab
+ping homelab.local
 ```
 
 ---
