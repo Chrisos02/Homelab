@@ -22,7 +22,7 @@ Recommended settings:
 - Screen saver timeout: 300 seconds
 - Password protect the screen saver: Enabled
 
-## Missing Screenshot
+![Screen-Lock](screenshots/screen-lock.png)
 
 Add a screenshot named:
 
