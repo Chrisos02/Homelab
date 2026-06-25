@@ -65,8 +65,6 @@ User Configuration
 
 ![Drive Map Properties HR](screenshots/drive-map-properties-hr.png)
 
-![Drive Maps Final](screenshots/drive-maps-final.png)
-
 ### Validation
 
 Logged in as `ola.hr` and confirmed only the HR drive was mapped.
