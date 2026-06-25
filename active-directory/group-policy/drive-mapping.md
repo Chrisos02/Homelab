@@ -17,8 +17,8 @@ Automatically map department network drives based on Active Directory group memb
 The setup was tested by logging into `User01` as domain users.
 
 - `ola.hr` received H:
-- IT users should receive I:
-- Sales users should receive S:
+- `chris.it` received I:
+- `kari.sales` received S:
 
 ## Screenshots
 
@@ -26,10 +26,6 @@ The setup was tested by logging into `User01` as domain users.
 
 ![HR Drive Result](screenshots/hr-drive-result.png)
 
-## Missing Screenshot
+![IT Drive Result](screenshots/it-drive-result.png)
 
-Add one screenshot of Item-Level Targeting showing:
-
-```text
-Security Group = HR_Users
-```
+![Sales Drive Result](screenshots/sales-drive-result.png)
