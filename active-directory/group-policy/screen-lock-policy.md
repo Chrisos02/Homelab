@@ -16,12 +16,6 @@ User Configuration
             └── Personalization
 ```
 
-Recommended settings:
-
-- Enable screen saver: Enabled
-- Screen saver timeout: 300 seconds
-- Password protect the screen saver: Enabled
-
 ## Screenshot
 ![Screen-Lock-Policy](screenshots/screen-lock.png)
 
