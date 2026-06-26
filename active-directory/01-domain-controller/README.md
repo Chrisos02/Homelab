@@ -333,26 +333,6 @@ This confirmed that:
 
 ---
 
-## Validation Checklist
-
-| Task | Status |
-|---|---|
-| Windows Server 2022 installed | Done |
-| DC01 static IP configured | Done |
-| AD DS installed | Done |
-| DNS installed | Done |
-| New forest created | Done |
-| Domain `homelab.local` created | Done |
-| OUs created | Done |
-| Users created | Done |
-| Security groups created | Done |
-| Group memberships configured | Done |
-| Windows 11 client configured | Done |
-| Client joined to domain | Done |
-| Domain login tested | Done |
-
----
-
 ## Screenshots
 
 Add screenshots to the `screenshots/` folder using these names:
@@ -388,16 +368,4 @@ Add screenshots to the `screenshots/` folder using these names:
 - Domain authentication testing
 - Infrastructure documentation
 
----
 
-## Original Notes
-
-The original step-by-step files are preserved in:
-
-```text
-original-notes/
-├── 01-network-setup.md
-├── 02-domain-controller.md
-├── 03-users-groups-ou.md
-└── 04-client-domain-join.md
-```
