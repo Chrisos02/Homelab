@@ -251,13 +251,6 @@ ping dc01
 nslookup homelab.local
 ```
 
-Expected results:
-
-- DC01 replies to ping.
-- `dc01` resolves correctly.
-- `homelab.local` resolves correctly.
-- DNS server points to `192.168.10.10`.
-
 ---
 
 ## 9. Domain Join
