@@ -21,9 +21,9 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 | Device | Local IP | Tailscale IP | Notes |
 |--------|----------|--------------|-------|
 | Router/Gateway | `192.168.10.1` | — | |
-| Proxmox Host | `192.168.10.200` | `100.117.x.x` | Static IP, Ethernet |
-| Ubuntu Docker VM | `192.168.10.119` | `100.72.x.x` | Main Docker host |
-| Pi-hole LXC | `192.168.10.100` | `100.104.x.x` | DNS server |
+| Proxmox Host | `192.168.10.200` | `100.x.x.x` | Static IP, Ethernet |
+| Ubuntu Docker VM | `192.168.10.119` | `100.x.x.x` | Main Docker host |
+| Pi-hole LXC | `192.168.10.100` | `100.x.x.x` | DNS server |
 
 ---
 
@@ -33,7 +33,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 - **Type:** Type 1 Hypervisor (bare metal)
 - **Version:** 8.4.0
 - **Web UI:** `https://192.168.10.200:8006`
-- **Remote:** `https://100.117.76.106:8006`
+- **Remote:** `https://100.x.x.x:8006`
 - **Network interface:** `enp3s0` (Ethernet)
 
 ### Ubuntu Server VM (`ubuntu-docker`)
@@ -42,7 +42,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 - **RAM:** 4GB
 - **Disk:** 50GB
 - **Local IP:** `192.168.10.119`
-- **Tailscale IP:** `100.72.135.5`
+- **Tailscale IP:** `100.x.x.x`
 
 ### Pi-hole LXC Container
 - **OS:** Debian 12
@@ -50,7 +50,7 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 - **RAM:** 512MB
 - **Disk:** 4GB
 - **Local IP:** `192.168.10.100`
-- **Tailscale IP:** `100.104.157.125`
+- **Tailscale IP:** `100.x.x.x`
 
 ---
 
@@ -58,12 +58,12 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 
 | Service | Local URL | Remote URL | Description |
 |---------|-----------|------------|-------------|
-| Proxmox | `https://192.168.10.200:8006` | `https://100.117.76.106:8006` | Hypervisor management |
-| Portainer | `http://192.168.10.119:9000` | `http://100.72.135.5:9000` | Docker management |
-| Grafana | `http://192.168.10.119:3000` | `http://100.72.135.5:3000` | Monitoring dashboards |
-| Prometheus | `http://192.168.10.119:9090` | `http://100.72.135.5:9090` | Metrics collection |
-| Homepage | `http://192.168.10.119:3001` | `http://100.72.135.5:3001` | Service dashboard |
-| Pi-hole | `http://192.168.10.100/admin` | `http://100.104.157.125/admin` | DNS ad blocker |
+| Proxmox | `https://192.168.10.200:8006` | `https://100.x.x.x:8006` | Hypervisor management |
+| Portainer | `http://192.168.10.119:9000` | `http://100.x.x.x:9000` | Docker management |
+| Grafana | `http://192.168.10.119:3000` | `http://100.x.x.x:3000` | Monitoring dashboards |
+| Prometheus | `http://192.168.10.119:9090` | `http://100.x.x.x:9090` | Metrics collection |
+| Homepage | `http://192.168.10.119:3001` | `http://100.x.x.x:3001` | Service dashboard |
+| Pi-hole | `http://192.168.10.100/admin` | `http://100.x.x.x/admin` | DNS ad blocker |
 
 ---
 
