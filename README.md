@@ -21,9 +21,9 @@ Personal homelab built on an old desktop PC for learning IT infrastructure, netw
 | Device | Local IP | Tailscale IP | Notes |
 |--------|----------|--------------|-------|
 | Router/Gateway | `192.168.10.1` | — | |
-| Proxmox Host | `192.168.10.200` | `100.117.76.106` | Static IP, Ethernet |
-| Ubuntu Docker VM | `192.168.10.119` | `100.72.135.5` | Main Docker host |
-| Pi-hole LXC | `192.168.10.100` | `100.104.157.125` | DNS server |
+| Proxmox Host | `192.168.10.200` | `100.117.x.x` | Static IP, Ethernet |
+| Ubuntu Docker VM | `192.168.10.119` | `100.72.x.x` | Main Docker host |
+| Pi-hole LXC | `192.168.10.100` | `100.104.x.x` | DNS server |
 
 ---
 
