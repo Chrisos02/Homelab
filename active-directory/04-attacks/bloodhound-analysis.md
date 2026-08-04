@@ -45,25 +45,9 @@ BloodHound is used to visualize relationships within Active Directory.
 
 ---
 
-## Note
-
-At this stage, no significant privilege escalation paths were identified.
-
-This is expected in a clean lab environment.
-
----
-
 ## Key Concept
 
 BloodHound shows how permissions create attack paths, not just who is admin.
-
----
-
-## Status
-
-✔ BloodHound operational
-
-✔ Data successfully imported
 
 ---
 
