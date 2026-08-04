@@ -49,19 +49,6 @@ The `.zip` file is transferred to Kali Linux for analysis.
 * Identify privilege escalation paths
 * Analyze potential attack vectors
 
----
 
-## Key Concept
 
-SharpHound = data collection
-BloodHound = visualization
 
----
-
-## Status
-
-✔ Enumeration completed
-
-✔ Data successfully collected
-
----
