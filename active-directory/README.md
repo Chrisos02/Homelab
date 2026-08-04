@@ -130,17 +130,6 @@ homelab.local
 
 ---
 
-## Documentation
-
-1. [Network Setup](01-setup/01-network-setup.md)
-2. [Domain Controller Setup](02-domain-controller/02-domain-controller.md)
-3. [Users, Groups and OUs](03-users-groups-ou/03-users-groups-ou.md)
-4. [Client Domain Join](04-client-join/04-client-domain-join.md)
-5. [Group Policy](05-group-policy/05-group-policy.md)
-6. [PowerShell Scripts](scripts/README.md)
-
----
-
 ## Tools Used
 
 - Proxmox VE
