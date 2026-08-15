@@ -1,6 +1,6 @@
-# 🖥️ Homelab Setup
+# Homelab Setup
 
-Personal homelab built on an old desktop PC for learning IT infrastructure, networking, and DevOps skills.
+Personal homelab built on an old desktop PC using Proxmox VE to gain hands-on experience with IT infrastructure, networking, system administration, cybersecurity, and DevOps.
 
 ---
 
