@@ -84,9 +84,6 @@ Personal homelab built on an old desktop PC using Proxmox VE to gain hands-on ex
 ### Pi-hole — DNS Ad Blocker
 ![Pi-hole](screenshots/pi_hole.png)
 
-### Tailscale — Remote Access
-![Tailscale](screenshots/tailscale.png)
-
 ---
  
 ## Repository Structure
