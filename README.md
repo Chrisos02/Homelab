@@ -58,12 +58,12 @@ Personal homelab built on an old desktop PC using Proxmox VE to gain hands-on ex
 
 | Service | Local URL | Remote URL | Description |
 |---------|-----------|------------|-------------|
-| Proxmox | `https://192.168.10.200:8006` | `https://100.x.x.x:8006` | Hypervisor management |
-| Portainer | `http://192.168.10.119:9000` | `http://100.x.x.x:9000` | Docker management |
-| Grafana | `http://192.168.10.119:3000` | `http://100.x.x.x:3000` | Monitoring dashboards |
-| Prometheus | `http://192.168.10.119:9090` | `http://100.x.x.x:9090` | Metrics collection |
-| Homepage | `http://192.168.10.119:3001` | `http://100.x.x.x:3001` | Service dashboard |
-| Pi-hole | `http://192.168.10.100/admin` | `http://100.x.x.x/admin` | DNS ad blocker |
+| Proxmox | `https://192.168.10.200:8006` | `https://100.x.x.x:` | Hypervisor management |
+| Portainer | `http://192.168.10.119:9000` | `http://100.x.x.x` | Docker management |
+| Grafana | `http://192.168.10.119:3000` | `http://100.x.x.x` | Monitoring dashboards |
+| Prometheus | `http://192.168.10.119:9090` | `http://100.x.x.x` | Metrics collection |
+| Homepage | `http://192.168.10.119:3001` | `http://100.x.x.x` | Service dashboard |
+| Pi-hole | `http://192.168.10.100/admin` | `http://100.x.x.x` | DNS ad blocker |
 
 ---
 
