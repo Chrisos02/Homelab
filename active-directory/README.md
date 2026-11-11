@@ -294,7 +294,7 @@ Screenshots are included to document the implementation and verify the configura
 
 ### DNS Confirmation
 
-![DNS Confirmation](screenshots/06-dns-confirmation.png)
+![DNS Confirmation](screenshots/05-dns-confirmation.png)
 
 ### Domain Join
 
