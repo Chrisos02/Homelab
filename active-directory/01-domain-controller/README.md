@@ -418,16 +418,17 @@ This confirmed that:
 
 ## Screenshots
 
-COMING SOON
+ SOON
 
-Screenshot	Description
-dns-manager.png	DNS Manager showing the homelab.local DNS zone
-ad-users-computers.png	Active Directory Users and Computers
-ou-structure.png	Organizational Units, users and security groups
-dns-confirmation.png	Successful DNS lookup from User01
-domain-join.png	Confirmation that User01 successfully joined the domain
-domain-login.png	Successful login using a domain user account
-domain-controller-discovery.png	Successful domain controller discovery using nltest
-secure-channel-test.png	Successful Test-ComputerSecureChannel result
+| Screenshot | Description |
+|---|---|
+| `dns-manager.png` | DNS Manager showing the `homelab.local` DNS zone |
+| `ad-users-computers.png` | Active Directory Users and Computers |
+| `ou-structure.png` | Organizational Units, users and security groups |
+| `dns-confirmation.png` | Successful DNS lookup from User01 |
+| `domain-join.png` | Confirmation that User01 successfully joined the domain |
+| `domain-login.png` | Successful login using a domain user account |
+| `domain-controller-discovery.png` | Successful domain controller discovery using `nltest` |
+| `secure-channel-test.png` | Successful `Test-ComputerSecureChannel` result |
 
 ---
