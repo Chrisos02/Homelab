@@ -292,10 +292,6 @@ Screenshots are included to document the implementation and verify the configura
 
 ![DC01 IP](screenshots/04-dc01-ip-configuration.png)
 
-### User01 IP Configuration
-
-![User01 IP](screenshots/05-user01-ip-configuration.png)
-
 ### DNS Confirmation
 
 ![DNS Confirmation](screenshots/06-dns-confirmation.png)
