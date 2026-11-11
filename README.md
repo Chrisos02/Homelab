@@ -1,358 +1,240 @@
-# Active Directory Homelab
+# Homelab Infrastructure
 
-## Overview
+A personal homelab built on an old desktop PC using Proxmox VE. The environment is used to gain hands-on experience with IT infrastructure, virtualization, networking, Linux and Windows administration, cybersecurity, and DevOps.
 
-This project documents a Windows Server 2022 Active Directory environment running on Proxmox VE.
-
-The lab simulates a small business IT environment and is used to gain practical experience with Windows Server administration, identity management, DNS, DHCP, Group Policy and network administration.
-
-The environment runs on a dedicated internal network, separated from the home network using a virtual firewall and router (OPNsense).
-
-## Objectives
-
-- Deploy Windows Server 2022 as a Domain Controller.
-- Install and configure Active Directory Domain Services (AD DS).
-- Create and manage an Active Directory domain.
-- Configure DNS for internal domain resolution.
-- Configure DHCP for automatic client IP assignment.
-- Create Organizational Units (OUs).
-- Create domain users and security groups.
-- Assign users to groups based on organizational roles.
-- Join Windows 11 clients to the domain.
-- Verify domain connectivity and secure channel functionality.
-- Implement and test Group Policy Objects (GPOs).
+The homelab includes containerized services, network monitoring, DNS filtering, remote access, and an isolated Windows Server Active Directory environment.
 
 ---
 
-## Lab Environment
+## Hardware
 
-| Machine | Role | IP Address | Operating System |
-|---|---|---|---|
-| DC01 | Domain Controller, DNS and DHCP | `192.168.20.10` | Windows Server 2022 |
-| User01 | Domain-joined client | DHCP (`192.168.20.100–200`) | Windows 11 |
-| OPNsense | Firewall and default gateway | `192.168.20.1` (LAN) | OPNsense |
-
-**Domain:**
-
-```text
-homelab.local
-```
-
-### Network Configuration
-
-The Active Directory environment runs on a separate internal network behind OPNsense.
-
-| Setting | Value |
+| Component | Specification |
 |---|---|
-| Internal subnet | `192.168.20.0/24` |
-| Default gateway | `192.168.20.1` |
-| Domain Controller | `192.168.20.10` |
-| DNS server | `192.168.20.10` |
-| DHCP server | `192.168.20.10` |
-| DHCP address range | `192.168.20.100–192.168.20.200` |
+| CPU | Intel Core i7-4770 |
+| RAM | 16 GB DDR3 |
+| GPU | NVIDIA GTX 950 (unused) |
+| SSD | 512 GB (OS) |
+| HDD | 1 TB (storage) |
 
-The internal network uses a dedicated Proxmox Linux bridge (`vmbr1`), with OPNsense providing routing and internet connectivity.
+---
 
-Windows Server 2022 provides DNS and DHCP services for the internal network. The OPNsense DHCP service is disabled on the LAN interface to avoid competing DHCP servers.
+## Infrastructure
+
+### Proxmox VE
+
+- **Type:** Type 1 hypervisor (bare metal)
+- **Version:** 8.4.0
+- **Management IP:** `192.168.10.200`
+- **Web UI:** `https://192.168.10.200:8006`
+- **Physical network interface:** `enp3s0`
+- **Remote access:** Tailscale
+
+Proxmox VE is the central virtualization platform hosting the virtual machines and LXC containers.
+
+### Virtual Machines and Containers
+
+| Machine | OS | Role | Local IP |
+|---|---|---|---|
+| Ubuntu Docker VM | Ubuntu Server 22.04 LTS | Docker host | `192.168.10.119` |
+| Windows Server 2022 (DC01) | Windows Server 2022 | Active Directory, DNS and DHCP | `192.168.20.10` |
+| Windows 11 (User01) | Windows 11 | Active Directory client | DHCP |
+| OPNsense | OPNsense | Firewall and router | WAN: DHCP / LAN: `192.168.20.1` |
+| Pi-hole LXC | Debian 12 | DNS filtering | `192.168.10.100` |
+
+---
+
+## Network Architecture
+
+The homelab uses two separate virtual networks connected through an OPNsense virtual firewall.
+
+### Network Overview
+
+| Network | Subnet | Purpose |
+|---|---|---|
+| Home network | `192.168.10.0/24` | Proxmox management and existing services |
+| Internal lab network | `192.168.20.0/24` | Windows Server and domain-joined clients |
 
 ### Network Topology
 
 ```text
-                  Home Network
-                  192.168.10.0/24
-                         |
-                      vmbr0
-                         |
-                   OPNsense WAN
-                         |
-                     OPNsense
-                         |
-                   OPNsense LAN
-                    192.168.20.1
-                         |
-                      vmbr1
-                         |
-                Internal Lab Network
-                  192.168.20.0/24
-                         |
-                 +-------+-------+
-                 |               |
-                DC01           User01
-          Windows Server 2022  Windows 11
-            192.168.20.10       DHCP
-                 |
-          Active Directory
-             DNS / DHCP
+                         INTERNET
+                             |
+                      Home Router
+                       192.168.10.1
+                             |
+                       Home Network
+                      192.168.10.0/24
+                             |
+                       Proxmox VE
+                      192.168.10.200
+                             |
+                           vmbr0
+                             |
+                       OPNsense WAN
+                         DHCP
+                             |
+                       OPNsense
+                             |
+                       OPNsense LAN
+                       192.168.20.1
+                             |
+                           vmbr1
+                             |
+                    Internal Lab Network
+                      192.168.20.0/24
+                             |
+                    +--------+--------+
+                    |                 |
+               Windows Server     Windows 11
+                  DC01              User01
+              192.168.20.10         DHCP
+                    |
+              Active Directory
+                 DNS / DHCP
 ```
 
----
+### Proxmox Network Bridges
 
-## Active Directory Structure
+**vmbr0 – Home network**
 
-The domain is organized using Organizational Units to separate users, administrators, groups, computers and servers.
+- Connected to the physical Ethernet interface `enp3s0`.
+- Proxmox management IP: `192.168.10.200/24`.
+- Default gateway: `192.168.10.1`.
+- Hosts services and virtual machines connected to the home network.
 
-```text
-homelab.local
-│
-├── OU_Users
-│   ├── Chris Olsen
-│   ├── Ola Hansen
-│   └── Kari Nordmann
-│
-├── OU_Admins
-│   └── Chris Admin
-│
-├── OU_Groups
-│   ├── IT_Users
-│   ├── HR_Users
-│   ├── Sales_Users
-│   ├── IT_Admins
-│   └── Servers_Users
-│
-├── OU_Computers
-│   └── User01
-│
-└── OU_Servers
-    └── DC01
-```
+**vmbr1 – Internal lab network**
 
-## Users
+- Internal Linux bridge with no physical network ports.
+- No IP address assigned to the bridge itself.
+- Connects internal lab virtual machines to the LAN interface of OPNsense.
+- Uses the `192.168.20.0/24` subnet.
 
-| Name | Username | Role |
+The two networks are connected through OPNsense. This provides a routed network boundary between the home network and the internal lab environment.
+
+**Note:** This setup uses separate virtual bridges and subnets, not VLANs. VLAN configuration is a potential future improvement.
+
+### OPNsense
+
+OPNsense runs as a virtual firewall and router inside Proxmox.
+
+| Interface | Bridge | Address |
 |---|---|---|
-| Chris Olsen | `chris.it` | IT user |
-| Ola Hansen | `ola.hr` | HR user |
-| Kari Nordmann | `kari.sales` | Sales user |
-| Chris Admin | `cadmin` | Administrative account |
+| WAN | vmbr0 | DHCP from home router |
+| LAN | vmbr1 | `192.168.20.1/24` |
 
-## Security Groups
+Responsibilities:
 
-| Group | Purpose |
-|---|---|
-| IT_Users | Standard IT users |
-| HR_Users | HR department users |
-| Sales_Users | Sales department users |
-| IT_Admins | IT administrator accounts |
-| Servers_Users | Server-related access testing |
+- Routing between the internal lab network and external networks.
+- Outbound internet connectivity for lab machines.
+- Network traffic filtering through firewall rules.
+- Outbound NAT.
 
-## Group Memberships
-
-| User | Security Group |
-|---|---|
-| `chris.it` | IT_Users |
-| `ola.hr` | HR_Users |
-| `kari.sales` | Sales_Users |
-| `cadmin` | IT_Admins |
+The OPNsense DHCP service is disabled on LAN because Windows Server 2022 provides DHCP for the internal lab network.
 
 ---
 
-## Windows Server Services
+## Services
 
-### Active Directory Domain Services (AD DS)
-
-Windows Server 2022 operates as the Domain Controller for `homelab.local`.
-
-AD DS provides centralized identity and access management, allowing domain users and computers to authenticate against the domain.
-
-### DNS
-
-The Windows Server also hosts DNS for the Active Directory domain.
+### Ubuntu Docker VM
 
 | Setting | Value |
 |---|---|
-| DNS server IP | `192.168.20.10` |
-| Internal domain | `homelab.local` |
-| Client DNS | `192.168.20.10` |
+| OS | Ubuntu Server 22.04 LTS |
+| vCPUs | 4 |
+| RAM | 4 GB |
+| Disk | 50 GB |
+| Local IP | `192.168.10.119` |
+| Role | Main Docker host |
 
-Domain-joined clients use the Domain Controller as their DNS server to locate Active Directory services and resolve internal domain names.
+The Ubuntu VM hosts several self-hosted services using Docker and Docker Compose.
 
-### DHCP
+### Docker Services
 
-Windows Server 2022 provides automatic IP configuration to clients on the internal lab network.
+| Service | Local URL | Description |
+|---|---|---|
+| Portainer | `http://192.168.10.119:9000` | Docker management |
+| Grafana | `http://192.168.10.119:3000` | Monitoring dashboards |
+| Prometheus | `http://192.168.10.119:9090` | Metrics collection |
+| Homepage | `http://192.168.10.119:3001` | Service dashboard |
 
-**DHCP Scope: Homelab-LAN**
+### Pi-hole and Unbound
+
+Pi-hole runs as an LXC container on Proxmox.
 
 | Setting | Value |
 |---|---|
-| Network | `192.168.20.0/24` |
-| Start IP | `192.168.20.100` |
-| End IP | `192.168.20.200` |
-| Subnet mask | `255.255.255.0` |
-| Default gateway (Option 003) | `192.168.20.1` |
-| DNS server (Option 006) | `192.168.20.10` |
-| DNS domain (Option 015) | `homelab.local` |
+| OS | Debian 12 |
+| vCPUs | 1 |
+| RAM | 512 MB |
+| Disk | 4 GB |
+| Local IP | `192.168.10.100` |
+| Web interface | `http://192.168.10.100/admin` |
 
-The DHCP scope is configured and activated on Windows Server. OPNsense DHCP is disabled on the internal LAN to ensure that Windows Server is the only DHCP server for this network.
+Pi-hole provides network-wide DNS filtering and ad blocking for the home network.
 
----
+It uses **Unbound** as a local recursive DNS resolver instead of relying on an external public DNS resolver.
 
-## Windows 11 Domain Client
+Configuration file:
 
-Windows 11 is configured as a domain-joined workstation.
+[`pi-hole/unbound/pi-hole.conf`](pi-hole/unbound/pi-hole.conf)
 
-| Setting | Configuration |
-|---|---|
-| Computer name | User01 |
-| Operating system | Windows 11 |
-| Network | `192.168.20.0/24` |
-| IP configuration | Automatic (DHCP) |
-| DNS configuration | Automatic (DHCP) |
-| Domain | `homelab.local` |
-
-The client receives its IP address, default gateway and DNS server automatically from Windows Server 2022.
+**DNS note:** The internal Active Directory network uses Windows Server DNS (`192.168.20.10`). Pi-hole remains a separate DNS service on the home network.
 
 ---
 
-## Verification and Testing
+## Remote Access
 
-The following tests were performed to verify network connectivity and Active Directory functionality.
+Tailscale is installed on:
 
-### 1. Network Connectivity
+- Proxmox VE host
+- Ubuntu Docker VM
+- Pi-hole LXC container
 
-```cmd
-ping 192.168.20.1
-ping 1.1.1.1
-```
+Tailscale provides secure remote access to the homelab without requiring conventional port forwarding or exposing management services directly to the public internet.
 
-**Result:** Successful.
-
-Verified connectivity to the OPNsense LAN gateway and outbound internet connectivity.
-
-### 2. External DNS Resolution
-
-```cmd
-nslookup google.com
-```
-
-**Result:** Successful.
-
-Verified external DNS resolution from the Windows 11 client.
-
-### 3. DHCP Address Assignment
-
-```cmd
-ipconfig /release
-ipconfig /renew
-ipconfig /all
-```
-
-**Result:** Successful.
-
-Verified that the Windows 11 client receives its network configuration automatically from Windows Server 2022.
-
-### 4. Active Directory Domain Discovery
-
-```cmd
-nltest /dsgetdc:homelab.local
-```
-
-**Result:** Successful.
-
-Verified that the client can locate the Active Directory Domain Controller.
-
-### 5. Internal DNS Resolution
-
-```cmd
-nslookup homelab.local
-```
-
-**Result:** Successful.
-
-Verified DNS resolution for the internal Active Directory domain.
-
-### 6. Secure Channel Verification
-
-```powershell
-Test-ComputerSecureChannel -Verbose
-```
-
-**Result:** `True`.
-
-Verified that the Windows 11 client maintains a functioning secure channel with the Active Directory domain.
+Remote Tailscale IP addresses are intentionally represented as placeholders in this documentation.
 
 ---
 
 ## Screenshots
 
-Screenshots are included to document the implementation and verify the configuration.
+### Proxmox — Hypervisor
+![Proxmox](screenshots/proxmox.png)
 
-### Proxmox – Windows Server 2022 VM (DC01)
+### Homepage — Service Dashboard
+![Homepage](screenshots/homepage.png)
 
-![Windows Server in Proxmox](screenshots/09-windows-server-proxmox.png)
+### Grafana — Monitoring Dashboard
+![Grafana](screenshots/grafana_dashboard.png)
 
-### AD DS Installation
+### Portainer — Docker Management
+![Portainer](screenshots/potainer.png)
 
-![AD Installation](screenshots/02-ad-installation.png)
-
-### Domain Creation (homelab.local)
-
-![Domain Creation](screenshots/03-domain-creation.png)
-
-### DC01 IP Configuration
-
-![DC01 IP](screenshots/04-dc01-ip-configuration.png)
-
-### User01 IP Configuration
-
-![User01 IP](screenshots/05-user01-ip-configuration.png)
-
-### DNS Confirmation
-
-![DNS Confirmation](screenshots/06-dns-confirmation.png)
-
-### Domain Join
-
-![Domain Join](screenshots/07-domain-join.png)
-
-### OU Structure and Security Groups
-
-![OU Structure](screenshots/08-ou-structure.png)
-
-### Domain User Login
-
-![Domain Login](screenshots/10-domain-user-login.png)
-
-### DHCP Scope and Configuration
-
-Add a screenshot showing the active DHCP scope, address range and configured DHCP options.
-
-Suggested filename: `screenshots/11-dhcp-configuration.png`
-
-### OPNsense Network Interfaces
-
-Add a screenshot showing the WAN and LAN interface configuration.
-
-Suggested filename: `screenshots/12-opnsense-interfaces.png`
-
-### DHCP Client Configuration
-
-Add a screenshot of `ipconfig /all` on Windows 11, showing the DHCP server, assigned IP address, gateway and DNS server.
-
-Suggested filename: `screenshots/13-dhcp-client.png`
-
-### Active Directory Connectivity Tests
-
-Add a screenshot showing successful `nltest` and `Test-ComputerSecureChannel` results.
-
-Suggested filename: `screenshots/14-ad-connectivity-tests.png`
+### Pi-hole — DNS Ad Blocker
+![Pi-hole](screenshots/pi_hole.png)
 
 ---
 
-## Tools Used
+## Repository Structure
 
-- Proxmox VE
-- OPNsense
-- Windows Server 2022
-- Windows 11
-- Active Directory Domain Services
-- Active Directory Users and Computers
-- DNS Manager
-- DHCP Manager
-- Group Policy Management
-- PowerShell
-- Command Prompt
-
-
+```text
+homelab/
+├── README.md
+├── screenshots/
+├── monitoring/
+│   ├── docker-compose.yml
+│   └── prometheus.yml
+├── homepage/
+│   ├── docker-compose.yml
+│   └── config/
+│       └── services.yaml
+├── pi-hole/
+│   └── unbound/
+│       └── pi-hole.conf
+└── active-directory/
+    ├── README.md
+    └── screenshots/
+```
 
 
 
