@@ -420,24 +420,14 @@ This confirmed that:
 
 COMING SOON
 
-| Screenshot | Description |
-|---|---|
-| `server-manager.png` | Server Manager on DC01 |
-| `dc01-ip-configuration.png` | Static IP configuration for DC01 |
-| `ad-ds-installation.png` | AD DS role installation |
-| `domain-creation.png` | Domain creation / promotion wizard |
-| `opnsense-interfaces.png` | OPNsense WAN and LAN interfaces |
-| `dhcp-scope.png` | Active DHCP scope and address range |
-| `dhcp-scope-options.png` | DHCP options 003, 006 and 015 |
-| `dns-manager.png` | DNS Manager showing homelab.local |
-| `ad-users-computers.png` | Active Directory Users and Computers |
-| `ou-structure.png` | OU structure with users and groups |
-| `dc01-ip-configuration.png` | DC01 network configuration |
-| `user01-ip-configuration.png` | User01 IP configuration obtained through DHCP |
-| `dns-confirmation.png` | DNS lookup tests from User01 |
-| `domain-join.png` | Successful domain join |
-| `domain-login.png` | Successful login as domain user |
-| `domain-controller-discovery.png` | Successful nltest domain controller discovery |
-| `secure-channel-test.png` | Successful Test-ComputerSecureChannel result |
+Screenshot	Description
+dns-manager.png	DNS Manager showing the homelab.local DNS zone
+ad-users-computers.png	Active Directory Users and Computers
+ou-structure.png	Organizational Units, users and security groups
+dns-confirmation.png	Successful DNS lookup from User01
+domain-join.png	Confirmation that User01 successfully joined the domain
+domain-login.png	Successful login using a domain user account
+domain-controller-discovery.png	Successful domain controller discovery using nltest
+secure-channel-test.png	Successful Test-ComputerSecureChannel result
 
 ---
