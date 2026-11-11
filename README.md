@@ -192,8 +192,6 @@ Tailscale is installed on:
 
 Tailscale provides secure remote access to the homelab without requiring conventional port forwarding or exposing management services directly to the public internet.
 
-Remote Tailscale IP addresses are intentionally represented as placeholders in this documentation.
-
 ---
 
 ## Screenshots
