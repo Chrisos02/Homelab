@@ -310,6 +310,8 @@ Screenshots are included to document the implementation and verify the configura
 
 ### DHCP Scope and Configuration
 
+![DHCP Scope](screenshots/11-2-dhcp-configuration.png)
+
 ![DHCP Scope](screenshots/11-dhcp-configuration.png)
 
 ### OPNsense Network Interfaces
