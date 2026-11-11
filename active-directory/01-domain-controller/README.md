@@ -418,7 +418,7 @@ This confirmed that:
 
 ## Screenshots
 
-Add screenshots to the `screenshots/` folder using these names:
+COMING SOON
 
 | Screenshot | Description |
 |---|---|
